@@ -19,3 +19,4 @@ use App\Http\Controllers\WeatherController;
 // });
 
 Route::get('/', [WeatherController::class, 'index']);
+Route::post('/fetch-cities', [WeatherController::class, 'fetchCity']);

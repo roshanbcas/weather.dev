@@ -10968,3 +10968,7 @@ a.text-dark:focus {
   }
 }
 
+.weather-status {
+  text-align: center;
+}
+

@@ -16,7 +16,7 @@ class LocationController extends Controller
     // Get cities
     public function fetchCity(Request $request)
     {
-        $data['cities'] = Location::where("id", $request->id)
+        $data['cities'] = Location::where("country", $request->country)
                                     ->get(["city", "id"]);
                                       
         return response()->json($data);
