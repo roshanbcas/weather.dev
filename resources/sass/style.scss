@@ -1,3 +1,22 @@
 .weather-status {
     text-align: center;
+
+    #weather-city {
+        font-size: 35px;
+    }
+
+    #dt{
+        font-size: 16px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    #weather-info{
+        margin-top: 15px;
+    }
+
+    #temperature {
+        font-size: 45px;
+        
+    }
 }

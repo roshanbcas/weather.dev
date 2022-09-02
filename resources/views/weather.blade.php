@@ -20,37 +20,48 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <form id="findWeather" action="{{url('find-weather')}}" method="post">
-                        @csrf
-                        <h1>Search your location:</h1>
-                        <!-- Country -->
-                        <div class="form-group">
-                          <label for="country">Country:</label>
-                          <select class="form-control" name="country" id="country">
-                          @foreach ($countries as $data)
-                            <option value="{{$data->country}}">{{$data->country}}</option>
-                          @endforeach
-                          </select>
+                    <div class="card">                        
+                        <div class="card-body">
+                            <form id="findWeather">
+                                @csrf
+                                <h1>Search your location:</h1>
+                                <!-- Country -->
+                                <div class="form-group">
+                                  <label for="country">Country:</label>
+                                  <select class="form-control" name="country" id="country">
+                                  @foreach ($countries as $data)
+                                    <option value="{{$data->country}}">{{$data->country}}</option>
+                                  @endforeach
+                                  </select>
+                                </div>
+        
+                                <!-- City -->
+                                <div class="form-group">
+                                  <label for="city">City:</label>
+                                  <select class="form-control" name="city" id="city">                            
+                                  </select>
+                                </div>
+        
+                                <button type="submit" class="btn btn-primary">Go</button>
+                            </form>
                         </div>
-
-                        <!-- City -->
-                        <div class="form-group">
-                          <label for="city">City:</label>
-                          <select class="form-control" name="city" id="city">                            
-                          </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Go</button>
-                    </form>
+                    </div>
                 </div>
 
-                <div class="col-md-8">
-                    <div class="weather-status">
-                        <h4 id="wather-city">NEW YORK</h4>
-                        <h5 id="weather-country" >US</h5>
-                        <h2 id="weather-type">CLOUDY</h2>
-                        <img id="weather-icon" src="" alt="">
-                        <p id="temperature">15 C</p>
+                <div class="col-md-8">                    
+                    <div class="weather-status">                        
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 id="weather-city">NEW YORK</h4>
+                                <h5 id="weather-country">US</h5>
+                                <h5 id="dt">Date and time</h5>
+                                <h2 id="weather-type">CLOUDY</h2>
+                                <img class="img-thumbnail" id="weather-icon">
+                                <p id="weather-info">Lorem ipsum dolor sit amet.</p>
+                                <h2 id="temperature">15 C </h2>
+                                <p id="other_info">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,18 +92,34 @@
                 });
             });
 
-            // $('#findWeather').submit(function(e){
-            //     e.preventDefault();
-            //     $.ajax({
-            //         type: "POST",
-            //         url: "{{url('find-weather')}}",
-            //         data: $('#findWeather').serialize(),
-            //         success: function(result)
-            //         {
-            //             alert(result);
-            //         }
-            //     });
-            // });
+            $('#findWeather').submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('find-weather')}}",
+                    data: $('#findWeather').serialize(),
+                    success: function(result)
+                    {
+                        $.each(result.weather, function (key, value) {
+                            $('#weather-type').html(value.main);
+                            document.getElementById("weather-icon").src = "https://openweathermap.org/img/w/" + value.icon + ".png";
+                            $('#weather-info').html(value.description);
+                        });
+                        $.each(result, function (key, value) {
+                            if(key == "dt")
+                                $('#dt').html(value);
+                            if(key == "name")
+                                $('#weather-city').html(value);
+                            // Country
+                            $('#weather-country').html(value.country);
+                            if(key == "main"){
+                                $('#temperature').html(value.temp + " <span>&#8451;</span>");
+                                $('#other_info').html("<b>Feel like: </b>" + value.feels_like + " <span>&#8451;</span>, Min: " + value.temp_min + "  <span>&#8451;</span>, Max: " + value.temp_max + "  <span>&#8451;</span>, Pressure: " + value.pressure + " hPa, Humidity: " + value.humidity + " %");
+                            }
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>

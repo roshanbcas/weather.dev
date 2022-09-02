@@ -10972,3 +10972,21 @@ a.text-dark:focus {
   text-align: center;
 }
 
+.weather-status #weather-city {
+  font-size: 35px;
+}
+
+.weather-status #dt {
+  font-size: 16px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.weather-status #weather-info {
+  margin-top: 15px;
+}
+
+.weather-status #temperature {
+  font-size: 45px;
+}
+

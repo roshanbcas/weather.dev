@@ -19,10 +19,16 @@ class OpenWeatherController extends Controller
 
         $wt = new Weather();
 
-        // By coordinates : latitude and longitude
-        $info = $wt->getCurrentByCord(23.7104, 90.4074);
+        foreach($data as $obj)
+        {
+            $lat = $obj->lat;
+            $lon = $obj->lon;
+        }
 
-        return response()->json($data);
+        // By coordinates : latitude and longitude
+        $info = $wt->getCurrentByCord($lat, $lon);
+
+        return response()->json($info);
     }
 
 
