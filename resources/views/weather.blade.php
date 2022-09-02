@@ -20,7 +20,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <form action="" method="post">
+                    <form id="findWeather" action="{{url('find-weather')}}" method="post">
+                        @csrf
                         <h1>Search your location:</h1>
                         <!-- Country -->
                         <div class="form-group">
@@ -38,16 +39,18 @@
                           <select class="form-control" name="city" id="city">                            
                           </select>
                         </div>
+
+                        <button type="submit" class="btn btn-primary">Go</button>
                     </form>
                 </div>
 
                 <div class="col-md-8">
                     <div class="weather-status">
-                        <h4>NEW YORK</h4>
-                        <h5>US</h5>
-                        <h2>CLOUDY</h2>
-                        <img src="" alt="">
-                        <p>15 C</p>
+                        <h4 id="wather-city">NEW YORK</h4>
+                        <h5 id="weather-country" >US</h5>
+                        <h2 id="weather-type">CLOUDY</h2>
+                        <img id="weather-icon" src="" alt="">
+                        <p id="temperature">15 C</p>
                     </div>
                 </div>
             </div>
@@ -77,6 +80,19 @@
                     }
                 });
             });
+
+            // $('#findWeather').submit(function(e){
+            //     e.preventDefault();
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "{{url('find-weather')}}",
+            //         data: $('#findWeather').serialize(),
+            //         success: function(result)
+            //         {
+            //             alert(result);
+            //         }
+            //     });
+            // });
         });
     </script>
 </body>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\OpenWeatherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ use App\Http\Controllers\WeatherController;
 
 Route::get('/', [WeatherController::class, 'index']);
 Route::post('/fetch-cities', [WeatherController::class, 'fetchCity']);
+Route::post('/find-weather', [OpenWeatherController::class, 'findWeather']);
