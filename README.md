@@ -4,7 +4,7 @@ This system requires PHP 7 version.
 1. Download or clone the project.
 2. Run composer install to setup the pqckages.
 3. Copy the env file as .env.
-        cp .env.example .env
+        'cp .env.example .env
 4. Create a database and connect with the .env file.
         DB_CONNECTION=mysql
         DB_HOST=127.0.0.1
